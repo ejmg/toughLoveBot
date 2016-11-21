@@ -17,7 +17,8 @@ def setTwitterAuth():
     auth = ty.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
     auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
     api = ty.API(auth)
-    return api
+    return apy
 
 if __name__ == "__main__":
     api = setTwitterAuth()
+    print("Gabby is the best") 
