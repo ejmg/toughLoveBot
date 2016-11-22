@@ -21,3 +21,5 @@ def setTwitterAuth():
 
 if __name__ == "__main__":
     api = setTwitterAuth()
+    tweet = ""
+    api.update_status(tweet)
