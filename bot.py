@@ -50,7 +50,7 @@ if __name__ == "__main__":
     # get yesterday's date, this time
     time = arrow.now("US/Central").replace(days=-1).format("D HH:mm")
     api = setTwitterAuth()
-    if time[-2::] == "00" or time[::-2] == "30":
+    if time[-2::] == "00" or time[-2::] == "30":
         sendTweet(api)
     # me = api.me()
     # print(dir(me))
