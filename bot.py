@@ -120,7 +120,7 @@ if __name__ == "__main__":
     api = setTwitterAuth()
     # get the bot's user object
     bot = api.me()
-    if time[-5:-3:] == "11:15" or time[-5:-3:] == "16:15":
+    if time[-5::] == "11:15" or time[-5::] == "16:15":
         tweetAtFollower(api)
     elif time[-2::] == "00":
         sendTweet(api)
