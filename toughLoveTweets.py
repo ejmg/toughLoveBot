@@ -110,6 +110,24 @@ lonelyReplies = ["MORE PEOPLE LOVE YOU THEN YOU KNOW.",
                  "I LOVE YOU. AND SO DO OTHERS.",
                  "BREATHE DEEPLY."]
 
+followerReplies = ["YOU ARE AN AMAZING PERSON, YOU GOT THIS.",
+                   "IS YOUR SHIT TOGETHER? GET YOUR SHIT TOGETHER. YOU CAN DO IT.",
+                   "DO YOU HAVE SOME KIND OF ASSIGNMENT? PROJECT? GET TO IT. I BELIEVE IN YOU.",
+                   "DON’T YOU EVER FUCKING GIVE UP, DO YOU HEAR ME?",
+                   "SUP. YOU ARE COOL. THAT’S ALL, AS YOU WERE.",
+                   "IS THERE SOMETHING YOU CAN START WORKING ON SOON AND SHOULD?",
+                   "HEY, YOU ARE AN AMAZING PERSON. THAT’S ALL.",
+                   "HAVE YOU DRANK WATER? DRINK MORE WATER?",
+                   "HAVE YOU ATE TODAY? PLEASE EAT SOME FOOD.",
+                   "HATERS GONNA DRINK THE HATER-AID NO MATTER WHAT, IGNORE THEM.",
+                   "STICKS AND STONES MAY BREAK YOUR BONES BUT DON’T YOU LET SOME ASSHOLE HURT YOU.",
+                   "WHAT’S GOOD? YOU GOOD? YEAH YOU ARE.",
+                   "U R LOVED.",
+                   "HAVE A GREAT DAY. YOU DESERVE TO HAVE ONE.",
+                   "EAT YOUR GOSH DARN VEGGIES, YOU NEED THEM.",
+                   "MAKE SURE TO GET 7 HOURS OR MORE OF SLEEP, YOU DINGUS.",
+                   "DONT. FORGET. TO. CALL. YOUR. MOM."]
+
 
 if __name__ == "__main__":
     """
