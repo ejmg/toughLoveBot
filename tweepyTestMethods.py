@@ -47,12 +47,51 @@ def getRandomFollower(api, bot):
     api.update_status(tweet.format(followerHandle))
 
 
+def getRandomSearchResult(api, search):
+    """
+    gets 100 search results of the string, search, and returns a randomly
+    chosen tweet
+    """
+    searchResults = [status for status in ty.
+                     Cursor(api.search, q=search).items(100)]
+    randomTweet = searchResults[random.randint(0, len(searchResults) - 1)]
+    return randomTweet
+
+
+def replyRandomTweet(api):
+    randInt = random.randint(0, 2)
+    if randInt == 0:
+        message = worriedReplies[random.randint(0, len(worriedReplies) - 1)]
+        tweet = "@{} " + message
+        search = "\"I'm sad\""
+        randomTweet = getRandomSearchResult(api, search)
+        userHandle = randomTweet.user.screen_name
+        tweetID = randomTweet.id
+        api.update_status(tweet.format(userHandle), tweetID)
+    elif randInt == 1:
+        message = lonelyReplies[random.randint(0, len(lonelyReplies) - 1)]
+        tweet = "@{} " + message
+        search = "\"I'm lonely\""
+        randomTweet = getRandomSearchResult(api, search)
+        userHandle = randomTweet.user.screen_name
+        tweetID = randomTweet.id
+        api.update_status(tweet.format(userHandle), tweetID)
+    elif randInt == 2:
+        message = sickReplies[random.randint(0, len(lonelyReplies) - 1)]
+        tweet = "@{} " + message
+        search = "\"I'm sick\""
+        randomTweet = getRandomSearchResult(api, search)
+        userHandle = randomTweet.user.screen_name
+        tweetID = randomTweet.id
+        api.update_status(tweet.format(userHandle), tweetID)
+
+
 def getSearch(api, search):
     """
     gets search results of the string, search, returns 100 tweets.
     """
     # list comprehension ftw, makes paginated cursor into normal list which is
-    # better suited for this use case.
+    # better suited for this use case. 
     searchResults = [status for status in ty.
                      Cursor(api.search, q=search).items(100)]
     for result in searchResults:
@@ -60,13 +99,20 @@ def getSearch(api, search):
         print(result.text)
         print(result.user.screen_name)
 
+
+def tweetVideo(api):
+    api.update_status("TEST TWEET, DEBUGGING TWEETS WITH LINK TO VID: "
+                      "https://www.youtube.com/watch?v=sNYIAQcCF9k")
+
 if __name__ == "__main__":
     api = setTwitterAuth()
     # getSearch(api, "\"I am sad\"")
     # getFollowers(api)
     # this gets the user object
     bot = api.me()
-    getRandomFollower(api, bot)
+    tweetVideo(api)
+    # replyRandomTweet(api)
+    #getRandomFollower(api, bot)
     # bot account's id
     # print(bot.id)
     # bot's # of followers

@@ -9,6 +9,7 @@ import arrow
 import random
 from toughLoveTweets import (statusTweets, worriedReplies, lonelyReplies,
                              sickReplies, followerReplies)
+# ID is the unique twitter ID for this bot's account. Might have to use later.
 from toughLoveSecret import (CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN,
                              ACCESS_SECRET, ID)
 
@@ -36,16 +37,18 @@ def setTwitterAuth():
     return api
 
 
-def getSearch(api, search):
+def getRandomSearchResult(api, search):
     """
-    gets search results of the string, search, returns 100 tweets.
+    gets 100 search results of the string, search, and returns a randomly
+    chosen tweet
     """
     searchResults = [status for status in ty.
                      Cursor(api.search, q=search).items(100)]
-    return searchResults
+    randomTweet = searchResults[random.randint(0, len(searchResults) - 1)]
+    return randomTweet
 
 
-def tweetAtFollower(api, bot):
+def tweetAtFollower(api):
     """
     this method chooses a random follower to tweet a positive message at.
     """
@@ -65,13 +68,31 @@ def tweetAtFollower(api, bot):
 
 
 def replyRandomTweet(api):
-    randInt = randInt(0, 2)
+    randInt = random.randint(0, 2)
     if randInt == 0:
-        search = "\"I am sad\""
-        searchResults = getSearch(api, search)
-        
+        message = worriedReplies[random.randint(0, len(worriedReplies) - 1)]
+        tweet = "@{} " + message
+        search = "\"I'm sad\""
+        randomTweet = getRandomSearchResult(api, search)
+        userHandle = randomTweet.user.screen_name
+        tweetID = randomTweet.id
+        api.update_status(tweet.format(userHandle), tweetID)
     elif randInt == 1:
+        message = lonelyReplies[random.randint(0, len(lonelyReplies) - 1)]
+        tweet = "@{} " + message
+        search = "\"I'm lonely\""
+        randomTweet = getRandomSearchResult(api, search)
+        userHandle = randomTweet.user.screen_name
+        tweetID = randomTweet.id
+        api.update_status(tweet.format(userHandle), tweetID)
     elif randInt == 2:
+        message = sickReplies[random.randint(0, len(lonelyReplies) - 1)]
+        tweet = "@{} " + message
+        search = "\"I'm sick\""
+        randomTweet = getRandomSearchResult(api, search)
+        userHandle = randomTweet.user.screen_name
+        tweetID = randomTweet.id
+        api.update_status(tweet.format(userHandle), tweetID)
 
 
 def sendTweet(api):
@@ -86,18 +107,16 @@ def sendTweet(api):
 
 # driver is testing out stuff rn, not for deployment
 if __name__ == "__main__":
-    # get yesterday's date, this time
-    time = arrow.now("US/Central").replace(days=-1).format("D HH:mm")
+    # get today's day, time (day may be used for deletion purposes later)
+    time = arrow.now("US/Central").format("D HH:mm")
+    # set auth token
     api = setTwitterAuth()
+    # get the bot's user object
     bot = api.me()
     if time[-2::] == "00":
         sendTweet(api)
-    elif time[-2::] -== "30":
-        send
-    # me = api.me()
-    # print(dir(me))
-    # print(me.id)
-    # deleteOldTweets(api)
-    
-    # tweet = ""
-    # api.update_status()
+    elif time[-2::] == "30":
+        replyRandomTweet(api)
+    elif time[-5:-3:] == "11" or time[-5:-3:] == "16":
+        tweetAtFollower(api)
+    # THAT'S ALL, FOLKS!
