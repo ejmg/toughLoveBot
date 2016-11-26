@@ -68,6 +68,10 @@ def tweetAtFollower(api):
 
 
 def replyRandomTweet(api):
+    """
+    randomly selects a type of reply tweet and tweets to a random tweet of that
+    type based on search results
+    """
     randInt = random.randint(0, 2)
     if randInt == 0:
         message = worriedReplies[random.randint(0, len(worriedReplies) - 1)]
@@ -76,6 +80,7 @@ def replyRandomTweet(api):
         randomTweet = getRandomSearchResult(api, search)
         userHandle = randomTweet.user.screen_name
         tweetID = randomTweet.id
+        deleteOldTweets(api, tweet.format(userHandle))
         api.update_status(tweet.format(userHandle), tweetID)
     elif randInt == 1:
         message = lonelyReplies[random.randint(0, len(lonelyReplies) - 1)]
@@ -84,6 +89,7 @@ def replyRandomTweet(api):
         randomTweet = getRandomSearchResult(api, search)
         userHandle = randomTweet.user.screen_name
         tweetID = randomTweet.id
+        deleteOldTweets(api, tweet.format(userHandle))
         api.update_status(tweet.format(userHandle), tweetID)
     elif randInt == 2:
         message = sickReplies[random.randint(0, len(lonelyReplies) - 1)]
@@ -92,6 +98,7 @@ def replyRandomTweet(api):
         randomTweet = getRandomSearchResult(api, search)
         userHandle = randomTweet.user.screen_name
         tweetID = randomTweet.id
+        deleteOldTweets(api, tweet.format(userHandle))
         api.update_status(tweet.format(userHandle), tweetID)
 
 
@@ -105,7 +112,7 @@ def sendTweet(api):
     api.update_status(tweet)
 
 
-# driver is testing out stuff rn, not for deployment
+# main driver, chooses type of tweet to make based on time of day
 if __name__ == "__main__":
     # get today's day, time (day may be used for deletion purposes later)
     time = arrow.now("US/Central").format("D HH:mm")
@@ -113,10 +120,10 @@ if __name__ == "__main__":
     api = setTwitterAuth()
     # get the bot's user object
     bot = api.me()
-    if time[-2::] == "00":
+    if time[-5:-3:] == "11:15" or time[-5:-3:] == "16:15":
+        tweetAtFollower(api)
+    elif time[-2::] == "00":
         sendTweet(api)
     elif time[-2::] == "30":
         replyRandomTweet(api)
-    elif time[-5:-3:] == "11" or time[-5:-3:] == "16":
-        tweetAtFollower(api)
     # THAT'S ALL, FOLKS!
