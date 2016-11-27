@@ -98,7 +98,7 @@ sickReplies = ["PAIN EXISTS ONLY IN THE MIND. YOU GOT THIS.",
                "I LOVE YOU. AND SO DO OTHERS.",
                "BREATHE DEEPLY."]
 
-lonelyReplies = ["MORE PEOPLE LOVE YOU THEN YOU KNOW.",
+lonelyReplies = ["MORE PEOPLE LOVE YOU THAN YOU KNOW.",
                  "DON’T BE AFRAID TO REACH OUT.",
                  "WANTING TO BE LOVED IS NOT A WEAKNESS.",
                  "OTHER PEOPLE ARE NEVER AS SCARY AS THEY SEEM.",
