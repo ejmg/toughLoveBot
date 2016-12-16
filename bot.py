@@ -66,6 +66,17 @@ def tweetAtFollower(api):
     deleteOldTweets(api, tweet.format(followerHandle))
     api.update_status(tweet.format(followerHandle))
 
+def tweetAtGabby(api): 
+    """
+    this method tweets Gabby 
+    """
+    message = followerReplies[random.randint(0, len(followerReplies) - 1)]
+    tweet = ".@{} " + message
+    gabbysHandle = 'frescopaintings'
+    # check for duplicate, tweet away!
+    deleteOldTweets(api, tweet.format(gabbysHandle))
+    api.update_status(tweet.format(gabbysHandle))
+
 
 def replyRandomTweet(api):
     """
@@ -126,4 +137,6 @@ if __name__ == "__main__":
         sendTweet(api)
     elif time[-2::] == "30":
         replyRandomTweet(api)
+    elif time[-5::] == "08:00" or time[-5::] == "20:00": 
+        tweetAtGabby(api)
     # THAT'S ALL, FOLKS!
