@@ -137,6 +137,9 @@ if __name__ == "__main__":
         sendTweet(api)
     elif time[-2::] == "30":
         replyRandomTweet(api)
-    elif time[-5::] == "08:00" or time[-5::] == "20:00": 
-        tweetAtGabby(api)
     # THAT'S ALL, FOLKS!
+    
+    #separate if for Gabby and Gabby only
+    if time[-5::] == "08:00" or time[-5::] == "20:00": 
+        tweetAtGabby(api)
+    
