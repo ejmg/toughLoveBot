@@ -140,6 +140,5 @@ if __name__ == "__main__":
     # THAT'S ALL, FOLKS!
     
     #separate if for Gabby and Gabby only
-    if time[-5::] == "08:00" or time[-5::] == "20:00": 
+    if time[-5::] == "08:00" or time[-5::] == "22:00":
         tweetAtGabby(api)
-    
