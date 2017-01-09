@@ -1,4 +1,11 @@
 # -*- coding: utf-8 -*-
+"""
+this script streams Twitter for ToughLoveBot to find @ tweets and responds
+using the Tweepy module.
+
+version: 1.9.17
+author: gabrielle ortman
+"""
 
 import tweepy as ty
 import json
@@ -7,7 +14,8 @@ from toughLoveSecret import (CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN,
 from toughLoveTweets import followerReplies
 import random
 
-#override tweepy.StreamListener class
+
+# override tweepy.StreamListener class
 class DaysStreamListener(ty.StreamListener):
 
     def __init__(self, api):
@@ -21,21 +29,22 @@ class DaysStreamListener(ty.StreamListener):
     def on_error(self, status):
         print(status)
 
-    def respond(self, data): 
+    def respond(self, data):
         """
         method to respond to a tweet directed at @toughlovebot
         """
         user = data['user']['screen_name']
-        #print(user)
-        #avoid getting into an infinite loop with the bot at all costs
-        if user == 'TOUGHLOVEBOT': 
-            return 
+        # print(user)
+        # avoid getting into an infinite loop with the bot at all costs
+        if user == 'TOUGHLOVEBOT':
+            return
         tweet_id = data['id']
-        
+
         reply = followerReplies[random.randint(0, len(followerReplies) - 1)]
         reply_tweet = "@{} " + reply
         reply_tweet = reply_tweet.format(user)
-        api.update_status(status = reply_tweet, in_reply_to_status_id = tweet_id)
+        api.update_status(status=reply_tweet, in_reply_to_status_id=tweet_id)
+
 
 def set_twitter_auth():
     auth = ty.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
@@ -43,8 +52,9 @@ def set_twitter_auth():
     api = ty.API(auth)
     return api
 
-if __name__ == "__main__": 
+
+if __name__ == "__main__":
     api = set_twitter_auth()
     daysStreamListener = DaysStreamListener(api)
-    daysStream = ty.Stream(auth = api.auth, listener=daysStreamListener)
+    daysStream = ty.Stream(auth=api.auth, listener=daysStreamListener)
     daysStream.filter(track=['@toughlovebot'])
