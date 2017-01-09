@@ -1,17 +1,11 @@
 # -*- coding: utf-8 -*-
-"""
-    The streaming portion of the Days Until bot. 
-    This will parse a date from a tweet, 
-    calculate the number of days until that date,
-    and then tweet the days until that date.
-"""
+
 import tweepy as ty
 import json
 from toughLoveSecret import (CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN,
                              ACCESS_SECRET)
 from toughLoveTweets import followerReplies
 import random
-import time 
 
 #override tweepy.StreamListener class
 class DaysStreamListener(ty.StreamListener):
