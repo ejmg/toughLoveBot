@@ -66,7 +66,8 @@ def tweetAtFollower(api):
     deleteOldTweets(api, tweet.format(followerHandle))
     api.update_status(tweet.format(followerHandle))
 
-def tweetAtGabby(api): 
+
+def tweetAtGabby(api):
     """
     this method tweets Gabby 
     """
