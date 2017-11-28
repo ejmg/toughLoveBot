@@ -76,6 +76,17 @@ def tweetAtGabby(api):
     # check for duplicate, tweet away!
     deleteOldTweets(api, tweet.format(gabbysHandle))
     api.update_status(tweet.format(gabbysHandle))
+    
+def tweetAtSpook(api): 
+    """
+    this method tweets Spook Boy 
+    """
+    message = followerReplies[random.randint(0, len(followerReplies) - 1)]
+    tweet = ".@{} " + message
+    spookhandle = 'spookinhell'
+    # check for duplicate, tweet away!
+    deleteOldTweets(api, tweet.format(spookhandle))
+    api.update_status(tweet.format(spookhandle))
 
 
 def replyRandomTweet(api):
@@ -142,3 +153,6 @@ if __name__ == "__main__":
     #separate if for Gabby and Gabby only
     if time[-5::] == "08:00" or time[-5::] == "22:00":
         tweetAtGabby(api)
+        
+    if time[-5::] == "08:00" or time[-5::] == "22:00":
+        tweetAtSpook(api)
