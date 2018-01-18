@@ -66,9 +66,9 @@ def tweetAtFollower(api):
     deleteOldTweets(api, tweet.format(followerHandle))
     api.update_status(tweet.format(followerHandle))
 
-def tweetAtGabby(api): 
+def tweetAtGabby(api):
     """
-    this method tweets Gabby 
+    this method tweets Gabby
     """
     message = followerReplies[random.randint(0, len(followerReplies) - 1)]
     tweet = ".@{} " + message
@@ -76,14 +76,16 @@ def tweetAtGabby(api):
     # check for duplicate, tweet away!
     deleteOldTweets(api, tweet.format(gabbysHandle))
     api.update_status(tweet.format(gabbysHandle))
-    
-def tweetAtSpook(api): 
+
+def tweetAtSpook(api):
     """
-    this method tweets Spook Boy 
+    this method tweets Spook Boy
     """
     message = followerReplies[random.randint(0, len(followerReplies) - 1)]
     tweet = ".@{} " + message
-    spookhandle = 'spookinhell'
+    # make sure we never lose track of mr. handle changer
+    spook_id = 479991180
+    spookhandle = api.get_user(spook_id).screen_name
     # check for duplicate, tweet away!
     deleteOldTweets(api, tweet.format(spookhandle))
     api.update_status(tweet.format(spookhandle))
@@ -149,10 +151,10 @@ if __name__ == "__main__":
     elif time[-2::] == "30":
         replyRandomTweet(api)
     # THAT'S ALL, FOLKS!
-    
+
     #separate if for Gabby and Gabby only
-    if time[-5::] == "08:00" or time[-5::] == "22:00":
+    if time[-5::] == "06:00" or time[-5::] == "22:00":
         tweetAtGabby(api)
-        
-    if time[-5::] == "08:00" or time[-5::] == "22:00":
+
+    if time[-5::] == "06:00" or time[-5::] == "22:00":
         tweetAtSpook(api)
